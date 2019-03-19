@@ -1,3 +1,5 @@
+#author: Troy Hatchard
+#Date: 17/03/2019
 #program to allow a user to input two integers to get
 #the result of adding, subtracting, multiplying, and 
 #dividing the two integers
