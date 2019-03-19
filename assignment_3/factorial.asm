@@ -21,11 +21,11 @@ syscall
 #load the address of user_int
 la $t0, user_int
 #save the input integer into user_int address
-sb $v0, 0($t0)
+sw $v0, 0($t0)
 
 # vv compute factorial vv
 #setup loop index
-lb $s1, user_int
+lw $s1, user_int
 
 
 factorial_loop:
@@ -34,7 +34,7 @@ factorial_loop:
 blt $s1, 1, end_factorial_loop
 
 #load total from data
-lb $t1, factorial_total
+lw $t1, factorial_total
 #multiply total by the current index
 mult $t1, $s1
 #get total from $LO
@@ -43,7 +43,7 @@ mflo $t1
 #load address of factorial_total
 la $t2 factorial_total
 #store the total back to factorial_total
-sb $t1, 0($t2)
+sw $t1, 0($t2)
 
 #increment index
 sub $s1, $s1, 1
@@ -58,7 +58,7 @@ li $v0, 4
 syscall
 
 #output user input int
-lb $a0, user_int
+lw $a0, user_int
 li $v0, 1
 syscall
 
@@ -67,7 +67,7 @@ la $a0, prompt_output_2
 li $v0, 4
 
 syscall
-lb $a0, factorial_total
+lw $a0, factorial_total
 li $v0, 1
 syscall
 
@@ -81,5 +81,5 @@ syscall
 prompt_output_1: .asciiz "The factorial of " 
 prompt_output_2: .asciiz " is: "
 prompt_integer: .asciiz "Please input an integer between 0 and 12: "
-user_int: .byte 0
-factorial_total: .byte 1
+user_int: .word 0
+factorial_total: .word 1
