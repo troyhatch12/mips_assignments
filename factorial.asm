@@ -28,7 +28,24 @@ sb $v0, 0($t0)
 lb $s1, user_int
 
 factorial_loop:
+#increment index
+subi $s1, $s1, 1
+#break loop if index less than 1
+blt $s1, 1, end_factorial_loop
 
+#load total from data
+lb $t1, factorial_total
+#multiply total by the current index
+mult $t1, $s1
+#get total from $LO
+mflo $t1
+
+#load address of factorial_total
+la $t2 factorial_total
+#store the total back to factorial_total
+sb $t1, 0($t2)
+
+j factorial_loop
 
 end_factorial_loop:
 
