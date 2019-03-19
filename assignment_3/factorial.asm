@@ -27,9 +27,9 @@ sb $v0, 0($t0)
 #setup loop index
 lb $s1, user_int
 
+
 factorial_loop:
-#increment index
-sub $s1, $s1, 1
+
 #break loop if index less than 1
 blt $s1, 1, end_factorial_loop
 
@@ -45,13 +45,33 @@ la $t2 factorial_total
 #store the total back to factorial_total
 sb $t1, 0($t2)
 
+#increment index
+sub $s1, $s1, 1
+
 j factorial_loop
 
 end_factorial_loop:
 
+#output first part of sentence
+la $a0, prompt_output_1
+li $v0, 4
+syscall
+
+#output user input int
+lb $a0, user_int
+li $v0, 1
+syscall
+
+#output second part of sentence
+la $a0, prompt_output_2
+li $v0, 4
+
+syscall
 lb $a0, factorial_total
 li $v0, 1
 syscall
+
+
 
 #exit program
 li $v0, 10 
